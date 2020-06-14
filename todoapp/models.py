@@ -19,11 +19,10 @@ class Todo(models.Model):
         return self.title
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to='profiles', blank=True, null=True)
+    user = models.CharField(max_length=50)                          #OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='profiles', blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.user
-
 

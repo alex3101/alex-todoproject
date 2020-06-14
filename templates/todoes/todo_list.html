@@ -2,7 +2,7 @@
 
 
 {% block content %}
-<div class="container-fluid">
+<div class="container border border-success bg-white">
         <h3>All To-Do</h3>
     <div class="row">
         <div class="col-8">
@@ -14,7 +14,7 @@
                 <thead class="thead-light">
                     <tr>
                         <th>Title</th>
-                        <th>Deadline</th>
+                        <th class="text-center">Deadline</th>
                         <th>Status</th>
                         <th></th>
                     </tr>
@@ -24,14 +24,41 @@
                     {% for object in object_list  %}
                         <tr>
                             <td><a href="{% url 'todo-detail' object.id %}">{{ object.title}}</a></td>
-                            <td>{{ object.deadline }}</td>
+                            <td class="text-center">{{ object.deadline }}</td>
                             <!-- get_namaAttribut_display utk menampilkan data yang manusiawi -->
                             <td>{{ object.get_status_display }}</td>
                         </tr>
                     {% endfor %}
-                        
                 </tbody>
             </table>
+            {% if is_paginated %}
+            <div class="row mt-4">
+                <div class="col-12">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination ">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item "><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                            {% else %}
+                                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                            {% endif %}
+                            {% for i in paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                    <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{i}}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                            {% else %}
+                                <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                            {% endif %}
+                        </ul>
+                      </nav>
+                </div>
+            </div>
+    
+            {% endif %}
             {% endif %}
                 
         </div>

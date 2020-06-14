@@ -1,31 +1,22 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
 
 {% block content %}
 
-    <div class="container-fluid mt-4 ">
-        <div class="row">
-            <div class="col-8">
-                <h2>{{user.first_name}}</h2>
-
-                <div>
-                    <h4>Photo</h4>
-                    <p>
-                        
-                        {% if user.profile.photo %}
-                            <img src="/media/{{user.profile.photo}}"> 
-                        {% else %}
-                            <a href="#">Upload Photo</a>
-                        {% endif %}
-                            
-                    </p>
-                </div>
-                <div>
-                    <h4>Bio</h4>
-                    <p>{{user.profile.bio}}</p>
-                </div>
-                <a href="{% url 'profile-update' user.id %}">Update Profile</a>
-            </div>
-        </div>
+<div class="card border border-success" style="width: 36rem;">
+{% if user.profile.image %}
+      <img class="card-img-top" src="/media/{{user.profile.image}}" alt="Card image cap">
+{% else %}
+    <div class="card-body">
+      <a class="mt-4 mr-2" href="#">Upload image</a>
+{% endif %}
+      <h5 class="card-title mt-4">{{user.first_name}}</h5>
+      <h6 class="card-title mt-4">Bio:</h6>
+      <p class="card-text mt-4">{{user.profile.bio}}</p>
+      <a href="{% url 'update-profile' user.id %}" class="btn btn-primary mt-4">Update</a>
     </div>
+  </div>
+</div>
 {% endblock content %}
+    

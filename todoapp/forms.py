@@ -9,7 +9,13 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
        model = User
-       fields = ('username', 'first_name','password1', 'password2')
+       fields = ['username', 'first_name','password1', 'password2']
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = '__all__'
+
 
 class TodoForm(forms.ModelForm):
     class Meta:
@@ -21,17 +27,12 @@ class TodoEditForm(forms.ModelForm):
         model = Todo
         fields = '__all__'
 
-#class TodoCreateForm(forms.ModelForm):
- #   class Meta:
-  #      fields = ['title', 'deadline', 'description', 'status']
-
-class TitleForm(forms.ModelForm):
+class TodoEditStatusForm(forms.ModelForm):
     class Meta:
         model = Todo
-        fields = ['title']
-
+        fields = ['status']
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['user', 'photo', 'bio']
+        fields = ['user', 'image', 'bio']

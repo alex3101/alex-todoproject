@@ -7,21 +7,22 @@
 
 
 {% block content %}
-<div class="container-fluid mt-4">
-    <div class="row">
-        <div class="col-6">
-            <h2 class="mt-4"><b>{{object.title}}</b></h2>
-            
-            <h5 class="mt-4"><b>Deadline</b></h5>
-            <p>{{object.deadline}}</p>
-    
-            <h5 class="mt-4"><b>Deskripsi</b></h5>
-            <p>{{object.description}}</p>
-    
-            <p class="mt-4"><a href="{% url 'todo-edit' object.id %}">{{object.get_status_display}}</a></p>
-        </div>
+
+<div class="card border-success" style="width: 36rem;">
+    <div class="card-body bg-light">
+      <h4 class="text-center mt-2 mb-2 border-bottom border-success">Detail</h4>
+
+      <h5 class="card-title mt-4">{{object.title}}</h5>
+
+      <h6 class="card-subtitle mb-2 mt-2 text-muted">{{object.deadline}}</h6>
+
+      <p class="card-text mt-4">{{object.description}}</p>
+
+      <a href="{% url 'status-update' object.id %}" class="card-link btn btn-primary mt-4">{{object.get_status_display}}</a>
+
+      <a href="{% url 'todo-edit' object.id %}" class="card-link btn btn-primary mt-4 ">Edit</a>
     </div>
-</div>
+  </div>
 
 {% endblock content %}
     
